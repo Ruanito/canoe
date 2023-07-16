@@ -1,5 +1,8 @@
 # Canoe Tech Assessment
 
+## DB Diagram
+https://dbdiagram.io/d/64af396602bd1c4a5efb6633
+
 ## Install the application
 
 Steps to create the project in the local environment
@@ -111,10 +114,6 @@ Response payload:
     ]
 }
 ```
-
-## DB Diagram
-https://dbdiagram.io/d/64af396602bd1c4a5efb6633
-
 
 ### Tips
 
