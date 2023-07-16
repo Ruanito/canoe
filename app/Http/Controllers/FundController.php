@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\FundManager;
 use Canoe\Fund\Exception\NotFoundFundExecption;
 use Canoe\Fund\FundService;
 use Canoe\Fund\Http\AliasFundRequest;
 use Canoe\Fund\Http\FundManagerRequest;
 use Canoe\Fund\Http\FundRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class FundController extends Controller {
