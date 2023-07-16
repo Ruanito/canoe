@@ -23,8 +23,10 @@ class FundService {
         $fund_manager = FundManagerRepository::findOrCreate($fund_request->fund_manager->name);
 
         $fund = FundRepository::create($fund_request, $fund_manager->id);
-        foreach($fund_request->alias_funds as $alias_fund) {
-            AliasFundRepository::create($alias_fund, $fund->id);
+        if (isset($fund_request->alias_funds)) {
+            foreach($fund_request->alias_funds as $alias_fund) {
+                AliasFundRepository::create($alias_fund, $fund->id);
+            }
         }
         DB::commit();
 

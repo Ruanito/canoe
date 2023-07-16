@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use PhpParser\Node\Stmt\TraitUseAdaptation\Alias;
 
 class Fund extends Model {
     use HasFactory;
@@ -18,6 +17,6 @@ class Fund extends Model {
     }
 
     public function alias_funds(): HasMany {
-        return $this->hasMany(Alias::class, 'fund_id', 'id');
+        return $this->hasMany(AliasFund::class, 'fund_id', 'id');
     }
 }

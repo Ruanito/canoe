@@ -31,6 +31,6 @@ class VerifyDuplicatedFund
         );
         if (!empty($duplicated_funds)) DuplicateFundWarning::dispatch($event->fund);
 
-        Log::debug('Duplicated funds: ' . json_encode($duplicated_funds));
+        Log::debug('Duplicated funds: ' . json_encode($duplicated_funds));   
     }
 }

@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\DB;
 class FundRepository {
     public static function list(array $params) {
         $funds =  DB::table('funds')
-            ->select('funds.id', 'funds.name', 'funds.start_year');
+            ->select('funds.id', 'funds.name', 'funds.start_year', 'fund_managers.name as fund_manager')
+            ->join('fund_managers', 'funds.fund_manager_id', '=', 'fund_managers.id');
 
         if (isset( $params['fund_manager'])) {
-            $funds = $funds->join('fund_managers', 'funds.fund_manager_id', '=', 'fund_managers.id')
-                ->where('fund_managers.name', 'like', $params['fund_manager']);
+            $funds = $funds->where('fund_managers.name', 'like', $params['fund_manager']);
         }
         
         if (isset($params['year'])) {
@@ -52,10 +52,9 @@ class FundRepository {
     }
 
     public static function findDuplicatedFunds(): array {
-        $query = "SELECT F.* FROM alias_funds AF
-                    INNER JOIN funds F ON AF.fund_id = F.id
-                    INNER JOIN (SELECT F.id AS fund_id, FM.id AS fund_manager_id, AF.id AS alias_fund_id, F.name AS fund_name FROM funds F INNER JOIN alias_funds AF ON F.id = AF.fund_id INNER JOIN fund_managers FM ON FM.id = F.fund_manager_id) funds_table
-                    ON funds_table.fund_name = AF.name AND F.fund_manager_id = funds_table.fund_manager_id AND F.id != funds_table.fund_id";
+        $query = "SELECT f.id AS fund_id, f.name AS fund_name, fm.name AS fund_manager FROM funds f
+            INNER JOIN alias_funds af ON af.name = f.name AND f.id != af.fund_id
+            INNER JOIN fund_managers fm ON fm.id = f.fund_manager_id";
 
         return DB::select($query);
     }
