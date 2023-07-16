@@ -19,6 +19,10 @@ Steps to create the project in the local environment
 
 `$ docker-compose up`
 
+### Run migrations
+
+`$ php artisan migrate`
+
 ### Start project
 
 `$ php artisan serve`
