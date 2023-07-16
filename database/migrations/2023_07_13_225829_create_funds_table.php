@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+        Schema::create('funds', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name', 50);
+            $table->year('start_year');
+            $table->unsignedBigInteger('fund_manager_id');
+            $table->foreign('fund_manager_id')->references('id')->on('fund_managers');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('funds');
     }
 };
